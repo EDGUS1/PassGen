@@ -17,6 +17,7 @@ public class PassGen {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("Current JVM version - " + System.getProperty("java.version"));
 
         SavePassWord app = new SavePassWord();
         app.setVisible(true);
