@@ -7,17 +7,12 @@ package com.passgen.view;
 
 import com.passgen.validator.Password;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -26,7 +21,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 
 /**
@@ -46,16 +40,16 @@ public class SavePassWord extends javax.swing.JFrame {
     public SavePassWord() {
         initComponents();
 
-        addPlaceholder(txtName, PH_NAME);
         addPlaceholder(txtService, PH_SERVICE);
+        addPlaceholder(txtName, PH_NAME);
         addPlaceholder(txtExclude, PH_EXCLUDE);
         addPlaceholder(txtPassword, PH_PASSWORD);
-        
+
         String basePath = new File("").getAbsolutePath();
         String image_path = basePath.concat(File.separator + "resources" + File.separator + "copiar.png");
         Icon icon = new ImageIcon(image_path);
         btnCopy.setIcon(icon);
-        
+
         cbModify.addItemListener((ItemEvent e) -> {
             if (txtPassword.isEditable()) {
                 txtPassword.setEditable(false);
@@ -98,7 +92,7 @@ public class SavePassWord extends javax.swing.JFrame {
         if (password.equals(PH_PASSWORD)) {
             password = "";
         }
-        return name + "," + service + "," + password + "," + encrypted;
+        return service + "," + name + "," + password + "," + encrypted;
 
     }
 
@@ -118,8 +112,8 @@ public class SavePassWord extends javax.swing.JFrame {
         btnGenerate = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
-        txtName = new javax.swing.JTextField();
         txtService = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         txtExclude = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -138,9 +132,9 @@ public class SavePassWord extends javax.swing.JFrame {
         setTitle("PassGen");
         setResizable(false);
 
-        jLabel1.setText("Username");
+        jLabel1.setText("Service");
 
-        jLabel2.setText("Service");
+        jLabel2.setText("Username");
 
         jLabel3.setText("Exclude");
 
@@ -181,9 +175,9 @@ public class SavePassWord extends javax.swing.JFrame {
             }
         });
 
-        txtName.addActionListener(new java.awt.event.ActionListener() {
+        txtService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
+                txtServiceActionPerformed(evt);
             }
         });
 
@@ -202,6 +196,11 @@ public class SavePassWord extends javax.swing.JFrame {
         jLabel4.setText("Password");
 
         btnSearch.setText("Search");
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchMouseClicked(evt);
+            }
+        });
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -292,9 +291,9 @@ public class SavePassWord extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtService)
+                            .addComponent(txtName)
                             .addComponent(txtExclude)
-                            .addComponent(txtName))
+                            .addComponent(txtService))
                         .addGap(52, 52, 52)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -326,12 +325,12 @@ public class SavePassWord extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClear))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -392,9 +391,9 @@ public class SavePassWord extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+    private void txtServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServiceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
+    }//GEN-LAST:event_txtServiceActionPerformed
 
     private void btnGenerateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerateMouseClicked
         Password pass = new Password(sdMin.getValue(), sdMax.getValue(), txtExclude.getText());
@@ -438,12 +437,12 @@ public class SavePassWord extends javax.swing.JFrame {
     }//GEN-LAST:event_sdMinStateChanged
 
     private void btnClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMouseClicked
-        txtName.setText(PH_NAME);
         txtService.setText(PH_SERVICE);
+        txtName.setText(PH_NAME);
         txtExclude.setText(PH_EXCLUDE);
         txtPassword.setText(PH_PASSWORD);
-        txtName.setForeground(Color.GRAY);
         txtService.setForeground(Color.GRAY);
+        txtName.setForeground(Color.GRAY);
         txtExclude.setForeground(Color.GRAY);
         txtPassword.setForeground(Color.GRAY);
 
@@ -486,6 +485,12 @@ public class SavePassWord extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
+        ReadPassword readPassword = new ReadPassword();
+        readPassword.setVisible(true);
+        readPassword.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnSearchMouseClicked
 
     /**
      * @param args the command line arguments
